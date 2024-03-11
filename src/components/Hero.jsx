@@ -2,12 +2,11 @@ import { useEffect, useState } from "react";
 import Tesseract from "tesseract.js";
 import DataImg from "../assets/data.webp";
 import data from "../data/data.json";
-// import Modal from "./Modal";
-import Form from "./Form";
 import Buttons from "./Buttons";
+import Modal from "./Modal";
 const Hero = () => {
   const [imagen, setImagen] = useState([]);
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState(true);
   const [placaText, setPlacaText] = useState("");
 
   // Función para reconocer la placa
@@ -16,9 +15,9 @@ const Hero = () => {
     const recognizePlaca = async () => {
       try {
         const result = await Tesseract.recognize(imagen, "eng", {
-          logger: (info) => {
-            console.log(info);
-          },
+          // logger: (info) => {
+          //   //console.log(info);
+          // },
         });
 
         const placaText = result.data.text;
@@ -114,7 +113,8 @@ const Hero = () => {
             </div>
           </div>
         </footer>
-        {modal && <Form imagen={imagen} placaText={placaText} />}
+        {/* {modal && <Modal imagen={imagen} placaText={placaText} />} */}
+        {modal && <Modal />}
       </section>
     </>
   );

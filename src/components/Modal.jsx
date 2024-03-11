@@ -1,29 +1,16 @@
 import Form from "./Form";
 
-const Modal = ({ imagen }) => {
+const Modal = () => {
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 ">
-      <div className="bg-white p-6 max-w-xl rounded-lg">
+    // <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 ">
+    <div className="fixed inset-0 flex items-center justify-center popap-overlay">
+      <div
+        className="rounded-2xl border border-blue-100 bg-white p-4 shadow-lg sm:p-6 lg:p-8"
+        role="alert"
+      >
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <img
-            alt=""
-            src={imagen}
-            className="h-full w-full rounded-xl object-cover"
-          />
-
-          <div className="flex flex-col justify-between">
-            <div>
-              <Form />
-            </div>
-
-            <div className="mt-6 sm:text-right">
-              <a
-                href="#"
-                className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
-              >
-                Find out more
-              </a>
-            </div>
+          <div className="grid content-center ">
+            <Form />
           </div>
         </div>
       </div>
