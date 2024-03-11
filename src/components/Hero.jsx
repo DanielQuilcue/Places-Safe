@@ -1,12 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Tesseract from "tesseract.js";
 import DataImg from "../assets/data.webp";
 import data from "../data/data.json";
-import Modal from "./Modal";
+// import Modal from "./Modal";
 import Form from "./Form";
+import Buttons from "./Buttons";
 const Hero = () => {
   const [imagen, setImagen] = useState([]);
   const [modal, setModal] = useState(false);
-  // abrir camara
+  const [placaText, setPlacaText] = useState("");
+
+  // Función para reconocer la placa
+  useEffect(() => {
+    // Función para reconocer la placa
+    const recognizePlaca = async () => {
+      try {
+        const result = await Tesseract.recognize(imagen, "eng", {
+          logger: (info) => {
+            console.log(info);
+          },
+        });
+
+        const placaText = result.data.text;
+        setPlacaText(placaText);
+      } catch (error) {
+        console.error("Error en el reconocimiento de texto:", error);
+      }
+    };
+
+    // Llamar a la función cuando la imagen cambie
+    if (imagen) {
+      recognizePlaca();
+    }
+  }, [imagen]);
+
+  // Función para manejar la carga de la imagen
   const manejarCargaImagen = (event) => {
     const archivoImagen = event.target.files[0];
 
@@ -14,13 +42,12 @@ const Hero = () => {
       const lector = new FileReader();
       lector.onloadend = () => {
         setImagen(lector.result);
-        setModal(true); // Mostrar el modal después de cargar la imagen
+        setModal(true);
       };
 
       lector.readAsDataURL(archivoImagen);
     }
   };
-  console.log(modal);
   return (
     <>
       <section className=" bg-blueGray-200 -mt-24">
@@ -69,18 +96,12 @@ const Hero = () => {
             <div className="flex flex-wrap items-center md:justify-between justify-center">
               <div className="w-full md:w-6/12 px-4 mx-auto text-center">
                 <div className="text-sm text-blueGray-500 font-semibold py-1">
-                  {/* <Button onclick={} /> */}
-                  <button
-                    type="button"
-                    onClick={() =>
+                  <Buttons
+                    type="input"
+                    onClickLogic={() =>
                       document.getElementById("inputImagen").click()
                     }
-                    className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    data-modal-toggle="popup-modal"
-                  >
-                    Tomar foto
-                  </button>
-                  {/* <InputImg /> */}
+                  />
                   {/* Input de imagen (oculto) */}
                   <input
                     id="inputImagen"
@@ -88,13 +109,12 @@ const Hero = () => {
                     onChange={manejarCargaImagen}
                     style={{ display: "none" }}
                   />
-                  {/* {modal && <Modal imagen={imagen} />} */}
                 </div>
               </div>
             </div>
           </div>
         </footer>
-        {modal && <Form imagen={imagen} />}
+        {modal && <Form imagen={imagen} placaText={placaText} />}
       </section>
     </>
   );

@@ -1,121 +1,102 @@
+import { NavLink, useLocation } from "react-router-dom";
+
 export const SideMenu = () => {
+  const location = useLocation();
   return (
-    <form action="#" className="space-y-4">
-      <div>
-        <label className="sr-only" htmlFor="name">
-          Name
-        </label>
-        <input
-          className="w-full rounded-lg border-gray-200 p-3 text-sm"
-          placeholder="Name"
-          type="text"
-          id="name"
-        />
-      </div>
-
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <div>
-          <label className="sr-only" htmlFor="email">
-            Email
-          </label>
-          <input
-            className="w-full rounded-lg border-gray-200 p-3 text-sm"
-            placeholder="Email address"
-            type="email"
-            id="email"
-          />
-        </div>
-
-        <div>
-          <label className="sr-only" htmlFor="phone">
-            Phone
-          </label>
-          <input
-            className="w-full rounded-lg border-gray-200 p-3 text-sm"
-            placeholder="Phone Number"
-            type="tel"
-            id="phone"
-          />
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 gap-4 text-center sm:grid-cols-3">
-        <div>
-          <label
-            htmlFor="Option1"
-            className="block w-full cursor-pointer rounded-lg border border-gray-200 p-3 text-gray-600 hover:border-black has-[:checked]:border-black has-[:checked]:bg-black has-[:checked]:text-white"
-            tabIndex="0"
-          >
-            <input
-              className="sr-only"
-              id="Option1"
-              type="radio"
-              tabIndex="-1"
-              name="option"
-            />
-
-            <span className="text-sm"> Option 1 </span>
-          </label>
-        </div>
-
-        <div>
-          <label
-            htmlFor="Option2"
-            className="block w-full cursor-pointer rounded-lg border border-gray-200 p-3 text-gray-600 hover:border-black has-[:checked]:border-black has-[:checked]:bg-black has-[:checked]:text-white"
-            tabIndex="0"
-          >
-            <input
-              className="sr-only"
-              id="Option2"
-              type="radio"
-              tabIndex="-1"
-              name="option"
-            />
-
-            <span className="text-sm"> Option 2 </span>
-          </label>
-        </div>
-
-        <div>
-          <label
-            htmlFor="Option3"
-            className="block w-full cursor-pointer rounded-lg border border-gray-200 p-3 text-gray-600 hover:border-black has-[:checked]:border-black has-[:checked]:bg-black has-[:checked]:text-white"
-            tabIndex="0"
-          >
-            <input
-              className="sr-only"
-              id="Option3"
-              type="radio"
-              tabIndex="-1"
-              name="option"
-            />
-
-            <span className="text-sm"> Option 3 </span>
-          </label>
-        </div>
-      </div>
-
-      <div>
-        <label className="sr-only" htmlFor="message">
-          Message
-        </label>
-
-        <textarea
-          className="w-full rounded-lg border-gray-200 p-3 text-sm"
-          placeholder="Message"
-          rows="8"
-          id="message"
-        ></textarea>
-      </div>
-
-      <div className="mt-4">
-        <button
-          type="submit"
-          className="inline-block w-full rounded-lg bg-black px-5 py-3 font-medium text-white sm:w-auto"
+    <div className="bg-black px-2 lg:px-4 py-2 lg:py-10 sm:rounded-xl flex lg:flex-col justify-evenly ">
+      <nav className="flex items-center flex-row space-x-2 lg:space-x-0 lg:flex-col lg:space-y-2">
+        <NavLink
+          to="/"
+          className={
+            location.pathname === "/"
+              ? "bg-gray-800 text-white p-4 inline-flex justify-center rounded-md"
+              : "text-white/50 p-4 inline-flex justify-center rounded-md hover:bg-gray-800 hover:text-white smooth-hover"
+          }
         >
-          Send Enquiry
-        </button>
-      </div>
-    </form>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5 sm:h-6 sm:w-6"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+          </svg>
+        </NavLink>
+        <NavLink
+          to="/dashboard"
+          className={
+            location.pathname === "/dashboard"
+              ? "bg-gray-800 text-white p-4 inline-flex justify-center rounded-md"
+              : "text-white/50 p-4 inline-flex justify-center rounded-md hover:bg-gray-800 hover:text-white smooth-hover"
+          }
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5 sm:h-6 sm:w-6"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+          </svg>
+        </NavLink>
+        <NavLink
+          to="/dashboard/tracker"
+          className={
+            location.pathname === "/dashboard/tracker"
+              ? "bg-gray-800 text-white p-4 inline-flex justify-center rounded-md"
+              : "text-white/50 p-4 inline-flex justify-center rounded-md hover:bg-gray-800 hover:text-white smooth-hover"
+          }
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5 sm:h-6 sm:w-6"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </NavLink>
+      </nav>
+      {/* <div className="flex items-center flex-row space-x-2 lg:space-x-0 lg:flex-col lg:space-y-2">
+        <a
+          className="text-white/50 p-4 inline-flex justify-center rounded-md hover:bg-gray-800 hover:text-white smooth-hover"
+          href="#"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5 sm:h-6 sm:w-6"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </a>
+        <a
+          className="text-white/50 p-4 inline-flex justify-center rounded-md hover:bg-gray-800 hover:text-white smooth-hover"
+          href="#"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5 sm:h-6 sm:w-6"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </a>
+      </div> */}
+    </div>
   );
 };

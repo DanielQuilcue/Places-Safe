@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "placa": "DIA BLO",
+    "nombre": "Daniel Quilcue",
+    "celular": "32222222",
+    "tipo": "visitante",
+    "vehiculo": "Moto",
+    "parqueado": "Si",
+    "creado": "10/03/2024",
+    "hora de ingreso": "11/03/2024",
+    "hora de salida": "12/03/2024"
+  },
+  {
+    "id": "2",
+    "placa": "RAM 123",
+    "nombre": "Carlos Alvira",
+    "celular": "31212454",
+    "tipo": "Propietario",
+    "vehiculo": "Carro",
+    "parqueado": "no",
+    "creado": "10/03/2024",
+    "hora de ingreso": "02/03/2024",
+    "hora de salida": "02/03/2024"
+  }
+]

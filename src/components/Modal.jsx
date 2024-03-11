@@ -2,7 +2,7 @@ import Form from "./Form";
 
 const Modal = ({ imagen }) => {
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 ">
       <div className="bg-white p-6 max-w-xl rounded-lg">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <img
