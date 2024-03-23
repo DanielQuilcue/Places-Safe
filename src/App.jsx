@@ -1,15 +1,20 @@
-import Footer from "./components/Footer"
-import Hero from "./components/Hero"
-import Navbar from "./components/Navbar"
-
+// import Main from "./components/Main";
+// import Navbar from "./components/Navbar";
+// import { AuthProvider } from "./context/AuthContext";
+import Login from "./pages/Login";
 function App() {
   return (
     <>
-    <Navbar />
-    <Hero/>
-    <Footer />
+      {/* <Navbar />
+
+      <Main /> */}
+
+      {/* <AuthProvider>
+        <Login />
+      </AuthProvider> */}
+      <Login />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

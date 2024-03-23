@@ -5,6 +5,7 @@ import "./index.css";
 import App from "./App.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import Tracker from "./pages/Tracker.jsx";
+import FormMain from "./pages/FormMain.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ export const router = createBrowserRouter([
   {
     path: "/dashboard/tracker",
     element: <Tracker />,
+  },
+  {
+    path: "/form",
+    element: <FormMain />,
   },
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(

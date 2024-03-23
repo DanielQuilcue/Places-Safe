@@ -1,8 +1,20 @@
+import { useEffect, useState } from "react";
 import Buttons from "./Buttons";
-import dashboard from "../data/dashboard.json";
+import { getData } from "../services/api";
 // import Graft from "./Graph";
 
 const Table = () => {
+  const [getDataFull, setgetDataFull] = useState([]);
+
+  useEffect(() => {
+    const dataBaseGet = async () => {
+      const dataBase = await getData();
+      setgetDataFull(dataBase);
+    };
+    dataBaseGet();
+  }, []);
+
+  console.log(getDataFull);
   return (
     <>
       <body className="antialiased font-sans bg-white w-full">
@@ -90,8 +102,8 @@ const Table = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {dashboard.map((items) => (
-                      <tr key={items.id}>
+                    {getDataFull.map((items, key) => (
+                      <tr key={key}>
                         <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                           <p className="text-gray-900 whitespace-no-wrap">
                             #{items.id}
@@ -108,7 +120,7 @@ const Table = () => {
                         </td>
                         <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                           <p className="text-gray-900 whitespace-no-wrap">
-                            {items.nombre}
+                            {items.username}
                           </p>
                         </td>
                         <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
@@ -138,7 +150,7 @@ const Table = () => {
                           </span>
                         </td>
                         <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
-                          <Buttons type="ver" />
+                          <Buttons type="ver" title="Ver" />
                         </td>
                       </tr>
                     ))}

@@ -1,37 +1,37 @@
-import { useEffect, useState } from "react";
-import Tesseract from "tesseract.js";
+import { useState } from "react";
+// import Tesseract from "tesseract.js";
 import DataImg from "../assets/data.webp";
 import data from "../data/data.json";
 import Buttons from "./Buttons";
 import Modal from "./Modal";
 const Hero = () => {
-  const [imagen, setImagen] = useState([]);
+  // const [imagen, setImagen] = useState([]);
   const [modal, setModal] = useState(true);
-  const [placaText, setPlacaText] = useState("");
+  // const [placaText, setPlacaText] = useState("");
 
   // Función para reconocer la placa
-  useEffect(() => {
-    // Función para reconocer la placa
-    const recognizePlaca = async () => {
-      try {
-        const result = await Tesseract.recognize(imagen, "eng", {
-          // logger: (info) => {
-          //   //console.log(info);
-          // },
-        });
+  // useEffect(() => {
+  //   // Función para reconocer la placa
+  //   const recognizePlaca = async () => {
+  //     try {
+  //       const result = await Tesseract.recognize(imagen, "eng", {
+  //         // logger: (info) => {
+  //         //   //console.log(info);
+  //         // },
+  //       });
 
-        const placaText = result.data.text;
-        setPlacaText(placaText);
-      } catch (error) {
-        console.error("Error en el reconocimiento de texto:", error);
-      }
-    };
+  //       const placaText = result.data.text;
+  //       setPlacaText(placaText);
+  //     } catch (error) {
+  //       console.error("Error en el reconocimiento de texto:", error);
+  //     }
+  //   };
 
-    // Llamar a la función cuando la imagen cambie
-    if (imagen) {
-      recognizePlaca();
-    }
-  }, [imagen]);
+  //   // Llamar a la función cuando la imagen cambie
+  //   if (imagen) {
+  //     recognizePlaca();
+  //   }
+  // }, [imagen]);
 
   // Función para manejar la carga de la imagen
   const manejarCargaImagen = (event) => {
@@ -40,7 +40,7 @@ const Hero = () => {
     if (archivoImagen) {
       const lector = new FileReader();
       lector.onloadend = () => {
-        setImagen(lector.result);
+        // setImagen(lector.result);
         setModal(true);
       };
 
