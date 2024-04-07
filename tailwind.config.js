@@ -10,5 +10,7 @@ export default {
     //   bggrayyy: ' #cbcbcb '
     // }
   },
-  plugins: [],
+  plugins: [
+    ('flowbite/plugin')
+  ],
 }

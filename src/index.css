@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@media only screen and (max-width: 600px) {
+  .displaynone {
+    display: none;
+  }
+}
+
+.body {
+  background-image: url("https://media.istockphoto.com/id/1346168039/es/vector/vector-vertical-ilustraci%C3%B3n-de-un-fondo-abstracto-abstracto-de-color-grunge-texturizado-de.jpg?s=612x612&w=0&k=20&c=25IGyWMPYQNLFfv171qE4hrA2bw-0EO59kSyNMARHWU=");
+  background-repeat: no-repeat;
+  background-size: cover;
+}

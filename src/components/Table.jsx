@@ -1,33 +1,65 @@
 import { useEffect, useState } from "react";
-import Buttons from "./Buttons";
-import { getData } from "../services/api";
-// import Graft from "./Graph";
+import { usePlates } from "../helper/index";
+import { TableHeader } from "./TableHeader";
+import { TableRow } from "./TableRow";
+import ModalForm from "./ModalForm";
 
 const Table = () => {
-  const [getDataFull, setgetDataFull] = useState([]);
+  const { getPlates, plates } = usePlates();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedPlateId, setSelectedPlateId] = useState([]); // Estado para el ID seleccionado
+
+  const handleViewDetails = (item) => {
+    setSelectedPlateId([item]);
+    setModalOpen(true);
+  };
+  const selectedPlateData = {
+    item: selectedPlateId,
+  };
+  const pageSize = 7;
 
   useEffect(() => {
-    const dataBaseGet = async () => {
-      const dataBase = await getData();
-      setgetDataFull(dataBase);
-    };
-    dataBaseGet();
-  }, []);
+    getPlates();
+  }, [getPlates]);
 
-  console.log(getDataFull);
+  if (plates.length === 0) return <h1>No plates</h1>;
+
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = Math.min(startIndex + pageSize - 1, plates.length - 1);
+
+  const visiblePlates = plates.slice(startIndex, endIndex + 1).reverse();
+
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
+
+  const handlePrevPage = () => {
+    setCurrentPage((prevPage) => prevPage - 1);
+  };
+
+  if (plates.length === 0) return <h1>No plates</h1>;
   return (
     <>
-      <body className="antialiased font-sans bg-white w-full">
-        {/* <Graft /> */}
-        <div className="container mx-auto px-4 sm:px-8">
-          <div className="py-8">
-            <div>
-              <h2 className="text-2xl font-semibold leading-tight uppercase">
-                Dashboard
-              </h2>
-            </div>
-            <div className="my-2 flex sm:flex-row flex-col">
-              <div className="flex flex-row mb-1 sm:mb-0">
+      <div className="antialiased font-sans bg-white w-full rounded-lg ">
+        {modalOpen && (
+          <ModalForm
+            isOpen={modalOpen}
+            onClose={ModalForm}
+            selectedPlateData={selectedPlateData}
+          />
+        )}
+        <div className=" mx-auto px-4 sm:px-8">
+          <div className="flex gap-2 mt-2">
+            {/* <CardUi />
+            <CardUi />
+            <CardUi />
+
+            <Legends /> */}
+          </div>
+          <div className="py-2">
+            <div className="my-2 flex sm:flex-row flex-col gap-1 justify-between">
+              {/* <div className="flex flex-row mb-1 sm:mb-0">
                 <div className="relative">
                   <select className="h-full rounded-l border block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                     <option>5</option>
@@ -60,7 +92,10 @@ const Table = () => {
                     </svg>
                   </div>
                 </div>
-              </div>
+              </div> */}
+              <h2 className="text-2xl font-semibold leading-tight uppercase">
+                Dashboard
+              </h2>
               <div className="block relative">
                 <span className="h-full absolute inset-y-0 left-0 flex items-center pl-2">
                   <svg
@@ -79,80 +114,14 @@ const Table = () => {
             <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
               <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
                 <table className="min-w-full leading-normal">
-                  <thead>
-                    <tr>
-                      <th className="px-5 py-3 border-b-2 border-gray-300 text-left leading-4 text-black tracking-wider uppercase">
-                        ID
-                      </th>
-                      <th className="px-5 py-3 border-b-2 border-gray-300 text-left leading-4 text-black tracking-wider uppercase">
-                        PLACA
-                      </th>
-                      <th className="px-5 py-3 border-b-2 border-gray-300 text-left leading-4 text-black tracking-wider uppercase">
-                        Nombres
-                      </th>
-                      <th className="px-5 py-3 border-b-2 border-gray-300 text-center leading-4 text-black tracking-wider uppercase">
-                        Vehiculo
-                      </th>
-                      <th className="px-5 py-3 border-b-2 border-gray-300  leading-4 text-black tracking-wider uppercase text-center">
-                        parqueado
-                      </th>
-                      <th className="px-5 py-3 border-b-2 border-gray-300 leading-4 text-black tracking-wider uppercase text-center">
-                        Ver mas
-                      </th>
-                    </tr>
-                  </thead>
+                  <TableHeader />
                   <tbody>
-                    {getDataFull.map((items, key) => (
-                      <tr key={key}>
-                        <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                          <p className="text-gray-900 whitespace-no-wrap">
-                            #{items.id}
-                          </p>
-                        </td>
-                        <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                          <div className="flex items-center">
-                            <div className="ml-3">
-                              <p className="text-gray-900 whitespace-no-wrap">
-                                {items.placa}
-                              </p>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                          <p className="text-gray-900 whitespace-no-wrap">
-                            {items.username}
-                          </p>
-                        </td>
-                        <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
-                          <p className="text-gray-900 whitespace-no-wrap">
-                            {items.vehiculo}
-                          </p>
-                        </td>
-                        <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
-                          <span
-                            className={`relative inline-block px-3 py-1 font-semibold ${
-                              items.parqueado === "Si"
-                                ? "text-green-900"
-                                : "text-red-900"
-                            } leading-tight`}
-                          >
-                            <span
-                              aria-hidden
-                              className={`absolute inset-0 ${
-                                items.parqueado === "Si"
-                                  ? "bg-green-200"
-                                  : "bg-red-200"
-                              } opacity-50 rounded-full`}
-                            ></span>
-                            <span className="relative uppercase">
-                              {items.parqueado}
-                            </span>
-                          </span>
-                        </td>
-                        <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
-                          <Buttons type="ver" title="Ver" />
-                        </td>
-                      </tr>
+                    {visiblePlates.map((items) => (
+                      <TableRow
+                        key={items._id}
+                        items={items}
+                        handleViewDetails={() => handleViewDetails(items)}
+                      />
                     ))}
                   </tbody>
                 </table>
@@ -161,10 +130,18 @@ const Table = () => {
                     Mostrando 1 a 4 de 50 Entradas
                   </span>
                   <div className="inline-flex mt-2 xs:mt-0">
-                    <button className="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-l">
+                    <button
+                      className="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-l"
+                      onClick={handlePrevPage}
+                      disabled={currentPage === 1}
+                    >
                       Anterior
                     </button>
-                    <button className="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-r">
+                    <button
+                      className="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-r"
+                      onClick={handleNextPage}
+                      disabled={endIndex === plates.length - 1}
+                    >
                       Siguiente
                     </button>
                   </div>
@@ -173,7 +150,7 @@ const Table = () => {
             </div>
           </div>
         </div>
-      </body>
+      </div>
     </>
   );
 };
