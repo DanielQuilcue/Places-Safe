@@ -1,33 +1,28 @@
-export default function ModalForm({ isOpen, onClose, selectedPlateData }) {
+import UdateForm from "./UpdateForm";
+export function ModalForm({ open, setOpen, selectedPlateData }) {
+  const handleOpen = () => setOpen(!open);
   return (
     <>
-      {isOpen && (
-        <div className="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-50 py-10">
-          <div className="max-h-full w-full max-w-xl overflow-y-auto sm:rounded-2xl bg-white">
-            <div className="w-full">
-              <button
-                className="absolute top-0 right-0 mt-2 mr-2 text-gray-600 hover:text-gray-800"
-                onClick={onClose}
-              >
-                <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+      <div className="relative w-2/4  ">
+        {open && (
+          <div
+            className="fixed inset-0 flex items-center justify-center z-50"
+            style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+          >
+            <div className="rounded-lg bg-white p-8 shadow-2xl z-60">
+              <div className="flex justify-end">
+                <button
+                  className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-md "
+                  onClick={handleOpen}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  ></path>
-                </svg>
-              </button>
-              <p>ID: {selectedPlateData.item[0]._id}</p>;
+                  Cerrar
+                </button>{" "}
+              </div>
+              <UdateForm selectedPlateData={selectedPlateData} />
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 }

@@ -13,25 +13,51 @@ import Dashboard from "./pages/Dashboard";
 
 import ProtectedRoute from "../ProtectedRoute";
 import ErrorPage from "./pages/ErrorPage";
+import Tracker from "./pages/Tracker";
+import Payment from "./pages/Payment";
+// import SuperAdmin from "./pages/SuperAdmin";
+// import Admin from "./components/ProtectedRouter/Admin";
+import Parking from "./pages/Parking";
+import ParkedNumber from "./pages/ParkedNumber";
+import ParkingPro from "./pages/ParkingPro";
+
+// import { ProtectedRouteGuarda } from "./components/ProtectedRouter/Protector";
+// import { useLocalStorage } from "react-use";
+import { getRoleFromLocalStorage } from "./helper";
 
 function App() {
+  const rol = getRoleFromLocalStorage();
+  console.log(rol);
   return (
     <AuthProvider>
       <PlateProdiver>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Login />} />
-            <Route path="*" element={<ErrorPage />} />
 
-            <Route element={<ProtectedRoute />}>
+            {/* <Route element={<ProtectedRoute />}> */}
+              {/* {Rol guarda} */}
+
               <Route path="/form" element={<FormMain />} />
+
+              <Route path="/visitor" element={<ParkedNumber />} />
+              <Route path="/propretary" element={<ParkingPro />} />
 
               <Route path="/register" element={<Register />} />
               <Route path="/propretary/:plateId" element={<PropertyForm />} />
               <Route path="/visitor/:plateId" element={<VisitorForm />} />
+            {/* </Route> */}
+            {/* {Rol guarda end} */}
 
-              <Route path="/dashboard" element={<Dashboard />} />
-            </Route>
+            {/* {Rol admin } */}
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/parking" element={<Parking />} />
+            <Route path="/tracker" element={<Tracker />} />
+            <Route path="/asign" element={<ParkedNumber />} />
+
+            <Route path="/payment" element={<Payment />} />
+            {/* {Rol admin end} */}
+            <Route path="*" element={<ErrorPage />} />
           </Routes>
         </BrowserRouter>
       </PlateProdiver>
@@ -40,13 +66,3 @@ function App() {
 }
 
 export default App;
-{
-  /* <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Router path="/form" element={<FormMain />} />
-        </Routes>
-      </BrowserRouter>{" "}
-    </AuthProvider> */
-}

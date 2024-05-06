@@ -3,31 +3,31 @@ import { NavLink } from "react-router-dom";
 export default function ErrorPage() {
   return (
     <>
-      <div className="lg:px-24 lg:py-24 md:py-20 md:px-44 px-4 py-24 items-center flex justify-center flex-col-reverse lg:flex-row md:gap-28 gap-16 h-screen">
-        <div className="xl:pt-24 w-full xl:w-1/2 relative pb-12 lg:pb-0">
-          <div className="relative">
-            <div className="absolute">
-              <div className="">
-                <h1 className="my-2 text-gray-800 font-bold text-2xl">
-                  Parece que has encontrado la puerta a la gran nada
-                </h1>
-                <p className="my-2 text-gray-800">
-                  Lo sentimos. Visite nuestra página de inicio
-                </p>
-                <NavLink to="/">
-                  <button className="sm:w-full lg:w-auto my-2 bg-blue-800  hover:bg-blue-700 text-gray-100 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500">
-                    Regresar
-                  </button>
-                </NavLink>
-              </div>
+      <div className="h-screen w-screen bg-gray-50 flex items-center">
+        <div className="container flex flex-col md:flex-row items-center justify-between px-5 text-gray-700">
+          <div className="w-full lg:w-1/2 mx-8">
+            <div className="text-7xl text-emerald-500  font-dark font-extrabold mb-8">
+              {" "}
+              404
             </div>
-            <div>
-              <img src="https://i.ibb.co/G9DC8S0/404-2.png" />
-            </div>
+            <p className="text-2xl md:text-3xl font-light leading-normal mb-8">
+              Lo sentimos, no hemos podido encontrar la página que busca.{" "}
+            </p>
+
+            <NavLink
+              to="/"
+              className="px-5 inline py-3 text-sm font-medium leading-5 shadow-2xl text-white transition-all duration-400 border border-transparent rounded-lg focus:outline-none bg-emerald-600 active:bg-emerald-600 hover:bg-emerald-700"
+            >
+              Regresar{" "}
+            </NavLink>
           </div>
-        </div>
-        <div>
-          <img src="https://i.ibb.co/ck1SGFJ/Group.png" />
+          <div className="w-full lg:flex lg:justify-end lg:w-1/2 mx-5 my-12">
+            <img
+              src="https://user-images.githubusercontent.com/43953425/166269493-acd08ccb-4df3-4474-95c7-ad1034d3c070.svg"
+              className=""
+              alt="Page not found"
+            />
+          </div>
         </div>
       </div>
       ;

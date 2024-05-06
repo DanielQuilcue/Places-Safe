@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
-import data from "../data/data.json";
 import { usePlates } from "../helper";
-
+import NavbarMain from "./NavbarMain";
+import data from "../data/data.json";
 const FormMain = () => {
   const [plateValue, setPlateValue] = useState("");
 
@@ -31,6 +31,7 @@ const FormMain = () => {
       (plate) =>
         plate.plate.replace(/\s/g, "").toUpperCase() === formattedPlateValue
     );
+    console.log(foundPlate);
 
     if (foundPlate) {
       if (foundPlate.typeEntry === "propietario") {
@@ -52,20 +53,18 @@ const FormMain = () => {
 
   return (
     <>
-      <div className="flex justify-center items-center w-screen h-screen bg-white body">
+      <NavbarMain />
+      <div className="flex justify-center items-center w-screen min-h-screen max-h-3.5 bg-[#e4e6ea]  body ">
         <ToastContainer />;
-        <div className="container mx-auto my-4 px-4 lg:px-20">
-          <div className="w-full p-8 my-4 md:px-12 lg:w-9/12 lg:pl-20 lg:pr-40 mr-auto rounded-2xl shadow-2xl ">
+        <div className="container mx-auto my-4 px-4 lg:px-20 ">
+          <div className="w-full p-8 my-4 md:px-12 lg:w-9/12 lg:pl-20 lg:pr-40 mr-auto rounded-2xl shadow-2xl  bg-white  ">
             <div className="flex justify-center text-center">
               <h1 className="font-bold uppercase text-5xl">Buscar Placa</h1>
             </div>
             <form onSubmit={handleSearch}>
               <div className="grid grid-cols-1 gap-5 md:grid-cols-2 mt-5">
                 <div className="relative">
-                  <label
-                    htmlFor="email-address-icon"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
-                  >
+                  <label className="block mb-2 text-sm font-bold    text-blue-900 uppercase ">
                     Placa <span className="text-blue-900 text-lg  ">*</span>
                   </label>
                   <div className="relative">
@@ -127,7 +126,15 @@ const FormMain = () => {
               </div>
 
               <div className="flex my-4 w-full justify-center">
-                <div className="flex w-1/2 justify-center">
+                <div className="flex w-1/2 justify-center gap-3">
+                  <button
+                    type="button"
+                    // onClick={handleSearch}
+                    className="uppercase text-sm font-bold tracking-wide bg-green-400 text-gray-100 p-3 rounded-lg w-full 
+                      focus:outline-none focus:shadow-outline"
+                  >
+                    Parqueaderos
+                  </button>
                   <button
                     type="button"
                     onClick={handleSearch}

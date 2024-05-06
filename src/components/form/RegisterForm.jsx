@@ -4,6 +4,8 @@ import { useAuth } from "../../helper/index";
 import { useForm } from "react-hook-form";
 
 const RegisterForm = () => {
+  const { signup, isAuthenticated, errors: registerErrors } = useAuth();
+
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -11,7 +13,6 @@ const RegisterForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { signup, isAuthenticated, errors: registerErrors } = useAuth();
 
   const navigate = useNavigate();
 
@@ -51,6 +52,22 @@ const RegisterForm = () => {
             {errors.username && (
               <p className="text-blue-500">Nombre del conjunto requerido</p>
             )}
+          </div>
+          <div className="relative mb-3 ">
+            {/* <input
+              className=" w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-blue-400"
+              type="text"
+              {...register("username", { required: true })}
+              placeholder="Seleccionar rol"
+            />
+            {errors.username && (
+              <p className="text-blue-500">Seleccionar rol</p>
+            )} */}
+            <select className=" w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-blue-400">
+              <option>Seleccionar rol</option>
+              <option value="guarda">Guarda de seguridad</option>
+              <option value="admin">Administrador</option>
+            </select>
           </div>
           <div className="relative mb-3 ">
             <input
@@ -108,7 +125,7 @@ const RegisterForm = () => {
               type="submit"
               className="w-full flex justify-center bg-blue-800  hover:bg-blue-700 text-gray-100 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500"
             >
-              Registrarme
+              Registrarmeeee
             </button>
           </div>
         </form>

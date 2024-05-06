@@ -2,17 +2,19 @@ import { useEffect, useState } from "react";
 import { usePlates } from "../helper/index";
 import { TableHeader } from "./TableHeader";
 import { TableRow } from "./TableRow";
-import ModalForm from "./ModalForm";
+import Info from "./Info";
+import { ModalForm } from "./ModalForm";
 
-const Table = () => {
+const Table = ({ searchTerm }) => {
   const { getPlates, plates } = usePlates();
   const [currentPage, setCurrentPage] = useState(1);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedPlateId, setSelectedPlateId] = useState([]); // Estado para el ID seleccionado
+  const [selectedPlateId, setSelectedPlateId] = useState([]);
+
+  const [open, setOpen] = useState(false);
 
   const handleViewDetails = (item) => {
     setSelectedPlateId([item]);
-    setModalOpen(true);
+    setOpen(true);
   };
   const selectedPlateData = {
     item: selectedPlateId,
@@ -23,7 +25,7 @@ const Table = () => {
     getPlates();
   }, [getPlates]);
 
-  if (plates.length === 0) return <h1>No plates</h1>;
+  if (plates.length === 0) return <Info />;
 
   const startIndex = (currentPage - 1) * pageSize;
   const endIndex = Math.min(startIndex + pageSize - 1, plates.length - 1);
@@ -38,25 +40,12 @@ const Table = () => {
     setCurrentPage((prevPage) => prevPage - 1);
   };
 
-  if (plates.length === 0) return <h1>No plates</h1>;
+  if (plates.length === 0) return <Info />;
+
   return (
     <>
-      <div className="antialiased font-sans bg-white w-full rounded-lg ">
-        {modalOpen && (
-          <ModalForm
-            isOpen={modalOpen}
-            onClose={ModalForm}
-            selectedPlateData={selectedPlateData}
-          />
-        )}
-        <div className=" mx-auto px-4 sm:px-8">
-          <div className="flex gap-2 mt-2">
-            {/* <CardUi />
-            <CardUi />
-            <CardUi />
-
-            <Legends /> */}
-          </div>
+      <div className="antialiased font-sans  w-full h-full rounded-lg flex-shrink-0 flex-grow ">
+        <div className=" mx-auto px-4 sm:px-8  ">
           <div className="py-2">
             <div className="my-2 flex sm:flex-row flex-col gap-1 justify-between">
               {/* <div className="flex flex-row mb-1 sm:mb-0">
@@ -93,10 +82,8 @@ const Table = () => {
                   </div>
                 </div>
               </div> */}
-              <h2 className="text-2xl font-semibold leading-tight uppercase">
-                Dashboard
-              </h2>
-              <div className="block relative">
+
+              {/* <div className="block ">
                 <span className="h-full absolute inset-y-0 left-0 flex items-center pl-2">
                   <svg
                     viewBox="0 0 24 24"
@@ -108,27 +95,44 @@ const Table = () => {
                 <input
                   placeholder="Buscar"
                   className="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none"
+                  // value={searchTerm}
+                  // onChange={(e) => setSearchTerm(e.target.value)}
                 />
-              </div>
+              </div> */}
             </div>
             <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
               <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
-                <table className="min-w-full leading-normal">
+                {open && (
+                  <ModalForm
+                    open={open}
+                    setOpen={setOpen}
+                    selectedPlateData={selectedPlateData}
+                  />
+                )}
+                <table className="min-w-full leading-normal bg-white">
                   <TableHeader />
                   <tbody>
-                    {visiblePlates.map((items) => (
-                      <TableRow
-                        key={items._id}
-                        items={items}
-                        handleViewDetails={() => handleViewDetails(items)}
-                      />
-                    ))}
+                    {visiblePlates
+                      .filter((item) =>
+                        searchTerm
+                          ? item.names
+                              .toLowerCase()
+                              .includes(searchTerm.toLowerCase())
+                          : true
+                      )
+                      .map((items) => (
+                        <TableRow
+                          key={items._id}
+                          items={items}
+                          handleViewDetails={() => handleViewDetails(items)}
+                        />
+                      ))}
                   </tbody>
                 </table>
                 <div className="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between          ">
-                  <span className="text-xs xs:text-sm text-gray-900">
+                  {/* <span className="text-xs xs:text-sm text-gray-900">
                     Mostrando 1 a 4 de 50 Entradas
-                  </span>
+                  </span> */}
                   <div className="inline-flex mt-2 xs:mt-0">
                     <button
                       className="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-l"
