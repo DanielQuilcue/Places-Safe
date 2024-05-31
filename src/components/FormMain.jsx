@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
@@ -127,14 +127,13 @@ const FormMain = () => {
 
               <div className="flex my-4 w-full justify-center">
                 <div className="flex w-1/2 justify-center gap-3">
-                  <button
-                    type="button"
-                    // onClick={handleSearch}
+                  <NavLink
+                    to="/visitor"
                     className="uppercase text-sm font-bold tracking-wide bg-green-400 text-gray-100 p-3 rounded-lg w-full 
-                      focus:outline-none focus:shadow-outline"
+                      focus:outline-none focus:shadow-outline text-center"
                   >
                     Parqueaderos
-                  </button>
+                  </NavLink>
                   <button
                     type="button"
                     onClick={handleSearch}

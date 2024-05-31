@@ -14,7 +14,6 @@ function ProtectedRoute() {
       </>
     );
   if (!isAuthenticated) return <Navigate to="/" replace />;
-  // if()
   return <Outlet />;
 }
 

@@ -35,7 +35,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Login />} />
 
-            {/* <Route element={<ProtectedRoute />}> */}
+            <Route element={<ProtectedRoute />}>
               {/* {Rol guarda} */}
 
               <Route path="/form" element={<FormMain />} />
@@ -46,16 +46,17 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/propretary/:plateId" element={<PropertyForm />} />
               <Route path="/visitor/:plateId" element={<VisitorForm />} />
-            {/* </Route> */}
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/parking" element={<Parking />} />
+              <Route path="/tracker" element={<Tracker />} />
+              <Route path="/asign" element={<ParkedNumber />} />
+
+              <Route path="/payment" element={<Payment />} />
+            </Route>
             {/* {Rol guarda end} */}
 
             {/* {Rol admin } */}
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/parking" element={<Parking />} />
-            <Route path="/tracker" element={<Tracker />} />
-            <Route path="/asign" element={<ParkedNumber />} />
 
-            <Route path="/payment" element={<Payment />} />
             {/* {Rol admin end} */}
             <Route path="*" element={<ErrorPage />} />
           </Routes>

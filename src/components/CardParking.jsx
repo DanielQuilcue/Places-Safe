@@ -7,12 +7,10 @@ export default function CardParking() {
   const [header, setHeader] = useState([]);
   // const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
-    const id = "662b06e90e236495f3eab71e";
-
     const get = async () => {
       try {
         // setIsLoading(true);
-        const res = await getHeader(id);
+        const res = await getHeader();
         setHeader(res);
         // setHeader(false);
       } catch (e) {
@@ -43,7 +41,15 @@ export default function CardParking() {
                     </div>
                     <div className="flex flex-col justify-center">
                       <div className="text-2xl   font-bold ">
-                        {header && header.carroDisponible}
+                        {header &&
+                          header.map((header) => (
+                            <>
+                              {
+                                header.parqueaderosDisponibles.visitantes
+                                  .carroDisponible
+                              }
+                            </>
+                          ))}
                       </div>
                       <div className="text-sm text-black">Total Carros</div>
                     </div>
@@ -51,7 +57,15 @@ export default function CardParking() {
                   <div className="flex">
                     <div className="flex flex-col justify-center ml-2  ">
                       <div className="text-2xl   font-bold ">
-                        {header && header.carroDisponible}
+                        {header &&
+                          header.map((header) => (
+                            <>
+                              {
+                                header.parqueaderosDisponibles.visitantes
+                                  .usoCarros
+                              }
+                            </>
+                          ))}
                       </div>
                       <div className="text-sm text-black">En uso</div>
                     </div>
@@ -71,9 +85,18 @@ export default function CardParking() {
                   </div>
                   <div className="flex flex-col justify-center">
                     <div className="text-2xl   font-bold">
-                      {" "}
+                      {/* {" "}
                       {header &&
-                        header.carroDisponible + header.motosDisponibles}
+                        header.carroDisponible + header.motosDisponibles} */}
+                      {header &&
+                        header.map((header) => (
+                          <>
+                            {
+                              header.parqueaderosDisponibles
+                                .parqueaderoAsingadoVis
+                            }
+                          </>
+                        ))}
                     </div>
                     <div className="text-sm text-black">Total Parqueadero</div>
                   </div>
@@ -82,15 +105,24 @@ export default function CardParking() {
             </div>
 
             <div className="w-full    ">
-              <div className="widget w-full p-4 rounded-lg bg-white border-l-4 border-yellow-400">
+              <div className="widget w-full p-4 rounded-lg bg-white border-l-4 border-green-400">
                 <div className="flex items-center justify-between">
                   <div className="flex">
-                    <div className="icon w-14 p-3.5 bg-yellow-400 text-white rounded-full mr-3">
+                    <div className="icon w-14 p-3.5 bg-green-400 text-white rounded-full mr-3">
                       <img src={MotoSvg} />
                     </div>
                     <div className="flex flex-col justify-center">
                       <div className="text-2xl   font-bold ">
-                        {header && header.motosDisponibles}
+                        {/* {header && header.motosDisponibles} */}
+                        {header &&
+                          header.map((header) => (
+                            <>
+                              {
+                                header.parqueaderosDisponibles.visitantes
+                                  .motosDisponibles
+                              }
+                            </>
+                          ))}
                       </div>
                       <div className="text-sm text-black">Total Motos</div>
                     </div>
@@ -98,7 +130,16 @@ export default function CardParking() {
                   <div className="flex">
                     <div className="flex flex-col justify-center ml-2  ">
                       <div className="text-2xl   font-bold ">
-                        {header && header.motosDisponibles}
+                        {/* {header && header.motosDisponibles} */}
+                        {header &&
+                          header.map((header) => (
+                            <>
+                              {
+                                header.parqueaderosDisponibles.visitantes
+                                  .usoMotos
+                              }
+                            </>
+                          ))}
                       </div>
                       <div className="text-sm text-black">En uso</div>
                     </div>

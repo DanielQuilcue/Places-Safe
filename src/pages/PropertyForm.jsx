@@ -45,16 +45,15 @@ function PropertyForm() {
 
   useEffect(() => {
     const option = () => {
-      if (parked === "no" && dataRecords === "exit") {
+      if (parked === "entry") {
         setshowTime(false);
-      } else if (dataRecords === "parked" && parked === "si") {
+      } else if (parked === "exit") {
         setshowTime(true);
       }
     };
     option();
   }, [dataRecords, parked]);
-  console.log(dataRecords, parked);
-  console.log(showTime);
+  console.log(dataRecords);
   const navigate = useNavigate();
 
   const onSubmit = async () => {

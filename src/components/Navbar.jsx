@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { createPopper } from "@popperjs/core";
 
@@ -8,7 +8,21 @@ import FullScreen from "../assets/Dashboard/fullScreen.svg";
 import "../styles/main.css";
 import Content from "./Content";
 export default function Navbar({ toggleSidebar, isActive }) {
-  const { user, logout } = useAuth();
+  const { logout } = useAuth();
+
+  const [user, setUser] = useState({ username: "", rol: "" });
+
+  useEffect(() => {
+    // Accedemos al localStorage
+    const storedUser = localStorage.getItem("userData"); // Asegúrate de que la clave sea correcta
+    if (storedUser) {
+      // Convertimos el JSON a un objeto
+      const userObject = JSON.parse(storedUser);
+      // Actualizamos el estado
+      setUser({ username: userObject.username, rol: userObject.rol });
+    }
+  }, []);
+
   const toggleFullscreen = () => {
     if (document.fullscreenElement) {
       document.exitFullscreen();
@@ -415,9 +429,9 @@ export default function Navbar({ toggleSidebar, isActive }) {
                 </div>
                 <div className="p-2 md:block text-left">
                   <h2 className="text-sm font-semibold text-gray-800 uppercase ">
-                    {user && user.username}
+                    {user.username}
                   </h2>
-                  <p className="text-xs text-gray-500">Administrator</p>
+                  <p className="text-xs text-gray-500 uppercase">{user.rol}</p>
                 </div>
               </button>
               <ul className="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">

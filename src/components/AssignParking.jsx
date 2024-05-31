@@ -8,7 +8,7 @@ export default function AssignParking() {
   const [isLoading, setIsLoading] = useState(false);
   const [motos, setMotos] = useState([]);
   const [carros, setCarros] = useState([]);
-  // const [selectedVehicle, setSelectedVehicle] = useState(null);
+  const [selectedVehicle, setSelectedVehicle] = useState(null);
 
   const [open, setOpen] = useState(false);
   useEffect(() => {
@@ -33,12 +33,11 @@ export default function AssignParking() {
     return () => clearInterval(intervalId);
   }, []);
 
-  const togglePopover = () => {
+  const togglePopover = (vehicle) => {
     setOpen(!open);
-    // setSelectedVehicle(vehicle);
+    setSelectedVehicle(vehicle);
   };
   if (isLoading) return <HashLoader color="#367ed6" />;
-  console.log(motos);
   return (
     <>
       <CardParking />
@@ -46,10 +45,10 @@ export default function AssignParking() {
         <ModalParkingVis
           open={open}
           setOpen={setOpen}
-          // selectedVehicle={selectedVehicle}
+          selectedVehicle={selectedVehicle}
         />
       )}
-      <div className="flex h-auto  justify-center">
+      <div className="flex h-auto  justify-center flex-col  lg:flex-row  md:flex-row">
         <div className="w-full md:w-1/2 rounded-lg bg-white px-8 py-4 shadow-md m-4">
           <div className="px-1 py-4">
             <h3 className="font-bold text-2xl font-sans uppercase text-center ">
@@ -57,24 +56,27 @@ export default function AssignParking() {
             </h3>
           </div>
           <ul className="grid grid-cols-4 px-1">
-            {carros.map((vehicle) => (
-              <li className="flex items-center flex-col" key={vehicle.id}>
-                <button
-                  type="button"
-                  onClick={() => togglePopover(vehicle)}
-                  className={`text-white border ${
-                    vehicle.estado === "desocupado"
-                      ? "border-green-700 bg-green-700 hover:bg-green-800 focus:ring-green-300"
-                      : "border-red-700 bg-red-700 hover:bg-red-800 focus:ring-red-300"
-                  } font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2`}
-                >
-                  # {vehicle.id}
-                </button>
-                <p className="font-semibold text-black mb-1  ">
-                  {vehicle.plateId === null ? " Sin asignar" : vehicle.plateId}
-                </p>
-              </li>
-            ))}
+            {carros &&
+              carros.map((vehicle) => (
+                <li className="flex items-center flex-col" key={vehicle._id}>
+                  <button
+                    type="button"
+                    onClick={() => togglePopover(vehicle)}
+                    className={`text-black border ${
+                      vehicle.estado === "desocupado"
+                        ? "border-green-400 bg-green-400 hover:bg-green-500 focus:ring-green-300"
+                        : "border-red-700 bg-red-700 hover:bg-red-800 focus:ring-red-300"
+                    } font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2`}
+                  >
+                    # {vehicle.nameVisible}
+                  </button>
+                  <p className="font-semibold text-black mb-1  uppercase ">
+                    {vehicle.plateId === null
+                      ? " Sin asignar"
+                      : vehicle.plateId}
+                  </p>
+                </li>
+              ))}
           </ul>
         </div>
         <div className="w-full md:w-1/2 rounded-lg bg-white px-8 py-4 shadow-md m-4">
@@ -85,18 +87,21 @@ export default function AssignParking() {
           </div>
           <ul className="grid grid-cols-4 px-1">
             {motos.map((vehicle) => (
-              <li className="flex items-center flex-col" key={vehicle.id}>
+              <li
+                className="flex items-center flex-col justify-center"
+                key={vehicle.id}
+              >
                 <button
                   type="button"
-                  className={`text-white border ${
+                  className={`text-black border ${
                     vehicle.estado === "desocupado"
-                      ? "border-green-700 bg-green-700 hover:bg-green-800 focus:ring-green-300"
+                      ? "border-green-400 bg-green-400 hover:bg-green-500 focus:ring-green-300"
                       : "border-red-700 bg-red-700 hover:bg-red-800 focus:ring-red-300"
                   } font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2`}
                 >
-                  # {vehicle.id}
+                  # {vehicle.nameVisible}
                 </button>
-                <p className="font-semibold text-black">
+                <p className="font-semibold text-black uppercase text-center">
                   {vehicle.plateId === null ? " Sin asignar" : vehicle.plateId}
                 </p>
               </li>

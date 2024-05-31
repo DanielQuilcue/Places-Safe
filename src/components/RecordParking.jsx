@@ -31,29 +31,44 @@ export default function RecordParking() {
         <table className="w-full min-w-[540px]">
           {displayedRecords.map(
             ({ _id, additionalInfo, timeInput, timeExit }) => (
-              <tbody key={_id}>
-                <tr>
-                  <td className="py-2 px-4 border-b border-b-gray-50">
-                    <div className="flex items-center">
-                      <span className="text-gray-600 text-sm font-medium hover:text-blue-500 ml-2 truncate">
-                        {additionalInfo && additionalInfo.plate}
+              <>
+                <thead>
+                  <tr>
+                    <th className="px-4 bg-gray-100 dark:bg-blue-900   text-black dark:text-white   align-middle border border-solid border-gray-200 dark:border-white  py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                      Placa
+                    </th>
+                    <th className="px-4 bg-gray-100 dark:bg-blue-900   text-black dark:text-white   align-middle border border-solid border-gray-200 dark:border-white  py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                      Fecha y hora de entrada
+                    </th>
+                    <th className="px-4 bg-gray-100 dark:bg-blue-900   text-black dark:text-white   align-middle border border-solid border-gray-200 dark:border-white  py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                      Fecha y hora de salienda{" "}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody key={_id}>
+                  <tr>
+                    <td className="py-2 px-4 border-b border-b-gray-50">
+                      <div className="flex items-center  ">
+                        <span className="text-gray-600 text-sm font-medium hover:text-blue-500 ml-2 truncate">
+                          {additionalInfo && additionalInfo.plate}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="py-2 px-4 border-b border-b-gray-50 text-center">
+                      {/* <p>Fecha y hora de entrada</p> */}
+                      <span className="p-1 rounded text-[12px] font-semibold bg-emerald-500/10 text-emerald-500 leading-none ml-1">
+                        {formatBogotaTime(timeInput)}
                       </span>
-                    </div>
-                  </td>
-                  <td className="py-2 px-4 border-b border-b-gray-50 text-center">
-                    <p>Fecha y hora de entrada</p>
-                    <span className="p-1 rounded text-[12px] font-semibold bg-emerald-500/10 text-emerald-500 leading-none ml-1">
-                      {formatBogotaTime(timeInput)}
-                    </span>
-                  </td>
-                  <td className="py-2 px-4 border-b border-b-gray-50 text-center">
-                    <p>Fecha y hora de salienda</p>
-                    <span className="p-1 rounded text-[12px] font-semibold bg-rose-500/10 text-rose-500 leading-none ml-1">
-                      {formatBogotaTime(timeExit)}
-                    </span>
-                  </td>
-                </tr>
-              </tbody>
+                    </td>
+                    <td className="py-2 px-4 border-b border-b-gray-50 text-center">
+                      {/* <p>Fecha y hora de salienda</p> */}
+                      <span className="p-1 rounded text-[12px] font-semibold bg-rose-500/10 text-rose-500 leading-none ml-1">
+                        {formatBogotaTime(timeExit)}
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </>
             )
           )}
         </table>

@@ -25,7 +25,7 @@ export const getRecordId = async (id) => {
 // const id = "662b06e90e236495f3eab71e"
 export const getMotos = async () => {
   try {
-    const response = await axios.get("/admin/get-motos");
+    const response = await axios.get("/admin/get-motitos");
     return response.data;
   } catch (e) {
     console.log(e);
@@ -34,7 +34,7 @@ export const getMotos = async () => {
 
 export const getCarros = async () => {
   try {
-    const response = await axios.get("/admin/get-carros");
+    const response = await axios.get("/admin/get-carritos");
     return response.data;
   } catch (e) {
     console.log(e);
@@ -42,9 +42,9 @@ export const getCarros = async () => {
 }
 
 
-export const getHeader = async (id) => {
+export const getHeader = async () => {
   try {
-    const res = await axios.get(`/admin/get-header/${id}`);
+    const res = await axios.get(`/parking-get`);
     return res.data
   } catch (e) {
     console.log(e);

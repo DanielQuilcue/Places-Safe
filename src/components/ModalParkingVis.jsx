@@ -1,5 +1,7 @@
-import TimeSvg from "../assets/Plate/time.svg";
-export default function ModalParkingVis({ open, setOpen }) {
+import CarSvg from "../assets/Parking/cars.svg";
+import MotoSvg from "../assets/Parking/moto.svg";
+export default function ModalParkingVis({ open, setOpen, selectedVehicle }) {
+  console.log(selectedVehicle);
   const handleOpen = () => setOpen(!open);
   return (
     <>
@@ -30,15 +32,24 @@ export default function ModalParkingVis({ open, setOpen }) {
                       <li className="py-3 sm:py-4">
                         <div className="flex items-center space-x-4">
                           <div className="flex-shrink-0">
-                            <img
-                              className="w-8 h-8 rounded-full"
-                              src={TimeSvg}
-                              alt="Neil image"
-                            />
+                            {selectedVehicle.vehicle === "carro" ? (
+                              <img
+                                className="w-8 h-8 rounded-full"
+                                src={CarSvg}
+                                alt="Caro"
+                              />
+                            ) : (
+                              <img
+                                className="w-8 h-8 rounded-full"
+                                src={MotoSvg}
+                                alt="Moto"
+                              />
+                            )}
                           </div>
                           <div className="flex-1 min-w-0">
                             <p className="text-sm font-semibold  text-gray-900 truncate ">
-                              {/* Hora y fecha de ingreso: */}
+                              {/* {selectedVehicle.plateId} */}
+                              {"placa"}
                             </p>
                           </div>
                           <div className="inline-flex items-center text-base font-semibold text-gray-900 ">
@@ -46,6 +57,7 @@ export default function ModalParkingVis({ open, setOpen }) {
                               selectedVehicle.map((item) => {
                                 return <p key={item.id}>{item.id}</p>;
                               })} */}
+                            {"abc-234"}
                           </div>
                         </div>
                       </li>
